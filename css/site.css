@@ -75,9 +75,11 @@ code[class*="language-"],
 main>.container {
     padding: 60px 15px 0;
 }
-.sticky-nav {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+
+@media (max-width:994px) {
+
+    .border-end
+    {
+      border:0px solid !important
+      }
+    }
