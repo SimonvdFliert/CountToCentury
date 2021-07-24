@@ -57,17 +57,92 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        // Call Hello World
-                        function helloWorld(){
-                            alert("hello World");
-                        }
+ 
+
+                            // get the values from the Page
+                            function getValues(){
+                                // get vaules from the page
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+                                
+
+                                // attempt parse into Integers
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+
+                                if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                    // need to call generateNumbers
+                                    let numbers = generateNumbers(startValue, endValue);
+                                    
+                                    // need to call displayNumbers
+                                    displayNumbers(numbers);
+                                }
+                                else{
+                                    alert("One of the values was not an number. Please enter a number for the start and end values.");
+                                }
+
+
+                            }
+
+                            // generate numbers from startvalue to the endvalue
+                            function generateNumbers(startValue, endValue){
+
+                                let numbers = [];
+
+                                for(let index = startValue; index <= endValue; index++){
+                                    numbers.push(index);
+                                }
+
+                                return numbers;
+                            }
+
+                            // display the numbers and mark the even numbers bold
+                            function displayNumbers(numbers){
+
+                                let templateRows = "";
+
+                                for(let index = 0; index < numbers.length; index++){
+                                    
+                                    let className = "even";
+                                    let number = numbers[index]
+
+                                    if(number % 2 == 0){
+                                        className = "even";
+                                    }
+                                    else{
+                                        className = "odd";
+                                    }
+                                    // Note: Template literals do not translate well through Prism. 
+                                    // See the code on Github to see the template literals correctly. 
+                                    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                                }
+
+                                document.getElementById("results").innerHTML = templateRows;
+
+                            }
                     </code> 
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structered in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code for this project consists of 3 functions, those being "getValues", "generateNumbers", "displayNumbers". These functions will be explained further below.</p>
+                    <h5>getValues</h5>
+                    <p>The getValues function retrieves the input values given by the user, which are then stored in variables for later use. 
+                        The values stored in the variables are transformed into integers. If the user inputs something that cannot be transformed, like a string, then the value stored is null (NaN).
+                        The function then checks if the values stored are indeed integers, afterwhich it calls the other functions.
+                        If the values are null, then an alert is shown on screen asking the user to input integers.</p>
+                    
+                    <h5>generateNumbers</h5>
+                    <p>The generateNumbers function is called in the getValues function, where it is given the start value and end value as parameters. 
+                        This function then proceeds to store all values in between, and including, the start value and end value in an array. These values are then returned to the getValues function.
+                    </p>
+                
+                    <h5>displayNumbers</h5>
+                    <p>The displayNumbers function is called in the getValues function, where it is given the array of numbers (which was created by the generateNumbers function) as parameter. 
+                        This function then proceeds to loop through the array and create a new table row for each number. Furthermore, it checks whether the number is even or odd. 
+                        The even numbers are made bold with the use of CSS. Finally the function displays the data on the webpage. </p>
+                
+                
+                
                 </div>
             </div>
         </div>
